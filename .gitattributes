@@ -1,0 +1,20 @@
+/mvnw text eol=lf
+*.cmd text eol=crlf
+
+
+# Normalizar texto a LF en el repo
+*               text=auto eol=lf
+
+# Scripts Windows con CRLF
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+
+# Scripts Unix y código con LF
+*.sh            text eol=lf
+*.java          text eol=lf
+*.kt            text eol=lf
+*.xml           text eol=lf
+*.yml           text eol=lf
+*.yaml          text eol=lf
+*.properties    text eol=lf
+*.md            text eol=lf

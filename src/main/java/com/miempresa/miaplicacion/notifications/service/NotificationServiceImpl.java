@@ -11,12 +11,14 @@ import java.util.Optional;
 public class NotificationServiceImpl implements NotificationService {
 
   private final NotificationRepository notificationRepository;
+  private final NotificationSender notificationSender;
 
-  public NotificationServiceImpl(NotificationRepository notificationRepository) {
+  public NotificationServiceImpl(NotificationRepository notificationRepository, NotificationSender notificationSender) {
     this.notificationRepository = notificationRepository;
+    this.notificationSender = notificationSender;
   }
 
-  @Override
+    @Override
   public List<Notification> getAllNotifications() {
     return notificationRepository.findAll();
   }
@@ -28,7 +30,8 @@ public class NotificationServiceImpl implements NotificationService {
 
   @Override
   public Notification createNotification(Notification notification) {
-    return notificationRepository.save(notification);
+      notificationSender.sendNotification(notification);
+      return notificationRepository.save(notification);
   }
 
     @Override

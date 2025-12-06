@@ -10,11 +10,13 @@ public class Notification {
     private Long id;
     private String titulo;
     private String contenido;
-    private String canal;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "canal")
+    private Channel canal;
 
     public Notification() {}
 
-    public Notification (String title, String content, String channel ){
+    public Notification (String title, String content, Channel channel ){
         this.titulo=title;
         this.contenido=content;
         this.canal=channel;
@@ -45,11 +47,11 @@ public class Notification {
         this.contenido = contenido;
     }
 
-    public String getCanal() {
+    public Channel getCanal() {
         return canal;
     }
 
-    public void setCanal(String canal) {
+    public void setCanal(Channel canal) {
         this.canal = canal;
     }
 }

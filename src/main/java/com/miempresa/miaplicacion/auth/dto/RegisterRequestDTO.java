@@ -1,25 +1,10 @@
-package com.miempresa.miaplicacion.users.model;
+package com.miempresa.miaplicacion.auth.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class RegisterRequestDTO {
     private String name;
     private String lastname;
     private String email;
     private String password;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

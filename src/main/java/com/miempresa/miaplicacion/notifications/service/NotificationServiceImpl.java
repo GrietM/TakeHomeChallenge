@@ -54,19 +54,19 @@ public class NotificationServiceImpl implements NotificationService {
 
       Notification saved = notificationRepository.save(newNotification);
       notificationSender.sendNotification(saved);
-      return notificationMapper.toResponseDTO(saved);//?
+      return notificationMapper.toResponseDTO(saved);
   }
 
   @Override
   public Optional<NotificationResponseDTO> updateNotification(Long id, NotificationCreateRequestDTO notificationDTO) {
       Optional<Notification> notification = notificationRepository.findById(id);
       if (notification.isEmpty()){
-          return Optional.empty(); // controller -> 404
+          return Optional.empty();
       }
 
       Optional<User> optUser = userRepository.findById(notificationDTO.getUserId());
       if (optUser.isEmpty()) {
-          throw new RuntimeException("User not found"); // mañana lo refinamos a 404/400
+          throw new RuntimeException("User not found");
       }
 
       Notification existing = notification.get();

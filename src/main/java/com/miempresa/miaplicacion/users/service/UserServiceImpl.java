@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public Optional<UserResponseDTO> updateUser(Long id, UserCreateRequestDTO userDTO) {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty()){
-            return Optional.empty(); // controller -> 404
+            return Optional.empty();
         }
 
         User existing = user. get();

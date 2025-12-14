@@ -1,10 +1,19 @@
 package com.miempresa.miaplicacion.notifications.controller;
 
+import com.miempresa.miaplicacion.notifications.dto.NotificationCreateRequestDTO;
+import com.miempresa.miaplicacion.notifications.dto.NotificationResponseDTO;
 import com.miempresa.miaplicacion.notifications.model.Notification;
 import com.miempresa.miaplicacion.notifications.service.NotificationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -19,19 +28,19 @@ public class NotificationController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Notification>> getNotifications() {
-    List<Notification> notificationsList = notificationService.getAllNotifications();
+  public ResponseEntity<List<NotificationResponseDTO>> getNotifications() {
+    List<NotificationResponseDTO> notificationsList = notificationService.getAllNotifications();
     return ResponseEntity.ok(notificationsList);
   }
 
   @PostMapping
-  public ResponseEntity<Notification> postNotification(@RequestBody Notification notification) {
-    Notification createdNotification= notificationService.createNotification(notification);
+  public ResponseEntity<NotificationResponseDTO> postNotification(@RequestBody NotificationCreateRequestDTO notification) {
+    NotificationResponseDTO createdNotification= notificationService.createNotification(notification);
     return new ResponseEntity<>(createdNotification, HttpStatus.CREATED);
   }
 
-  @PutMapping ("/{id}")
-  public ResponseEntity<Notification> putNotification(@PathVariable Long id, @RequestBody Notification notification) {
+  @PutMapping("/{id}")
+  public ResponseEntity<NotificationResponseDTO> putNotification(@PathVariable Long id, @RequestBody NotificationCreateRequestDTO notification) {
       return notificationService.updateNotification(id,notification)
               .map(ResponseEntity::ok)
               .orElseGet(()->ResponseEntity.notFound().build());
@@ -39,14 +48,23 @@ public class NotificationController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteNotification(@PathVariable Long id) {
+      //devuelve 204 aunque no exista, podria chequera bien q exista primero y sino devovler eso
     notificationService.deleteNotificationById(id);
     return ResponseEntity.noContent().build();
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Notification> getNotificationById(@PathVariable Long id){
+  public ResponseEntity<NotificationResponseDTO> getNotificationById(@PathVariable Long id){
       return notificationService.getNotificationById(id).
-              map(ResponseEntity::ok)
-              .orElseGet(()->ResponseEntity.notFound().build());
+              map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
   }
+
+  //revisar si esta buena esta ruta - el chat me recomineda otra mas REST friendly pero lo siento contrsdictorio
+  @GetMapping("/by-user/{userId}")
+  public ResponseEntity<List<NotificationResponseDTO>> getNotificationsByUserId(@PathVariable Long userId) {
+      List<NotificationResponseDTO> notificationsList = notificationService.getNotificationsByUser(userId);
+      return ResponseEntity.ok(notificationsList);
+  }
+
+
 }

@@ -48,7 +48,6 @@ public class NotificationController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteNotification(@PathVariable Long id) {
-      //devuelve 204 aunque no exista, podria chequera bien q exista primero y sino devovler eso
     notificationService.deleteNotificationById(id);
     return ResponseEntity.noContent().build();
   }
@@ -59,7 +58,6 @@ public class NotificationController {
               map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
   }
 
-  //revisar si esta buena esta ruta - el chat me recomineda otra mas REST friendly pero lo siento contrsdictorio
   @GetMapping("/by-user/{userId}")
   public ResponseEntity<List<NotificationResponseDTO>> getNotificationsByUserId(@PathVariable Long userId) {
       List<NotificationResponseDTO> notificationsList = notificationService.getNotificationsByUser(userId);

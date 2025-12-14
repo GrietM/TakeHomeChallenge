@@ -37,12 +37,6 @@ public class NotificationServiceImpl implements NotificationService {
         notificationResponseDTOList.add(notificationResponseDTO);
     }
     return notificationResponseDTOList;
-
-    //podria usar streams asi:
-   /*   return notificationRepository.findAll()
-              .stream()
-              .map(notificationMapper::toResponseDTO)
-              .toList();*/
   }
 
   @Override

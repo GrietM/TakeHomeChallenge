@@ -1,7 +1,6 @@
 package com.miempresa.miaplicacion.users.dto;
 
 public class UserResponseDTO {
-    //esta bien q sean public?
 
     private Long id;
     private String name;

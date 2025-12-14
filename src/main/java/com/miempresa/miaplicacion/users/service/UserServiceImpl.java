@@ -22,9 +22,6 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
     }
 
-    //agrear validaciones del tipo : create si no existe ya ese mail
-    //update si no esta en nulo el mail
-    //o cosas asi... como manjear la rspuesta del delete o updtae/create q no se ejecuatn
     @Override
     public Optional<UserResponseDTO> getUserById(Long id) {
         return userRepository.findById(id).map(userMapper::toResponseDTO);

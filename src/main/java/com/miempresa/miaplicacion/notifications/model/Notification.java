@@ -1,5 +1,6 @@
 package com.miempresa.miaplicacion.notifications.model;
 
+import com.miempresa.miaplicacion.users.model.User;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,9 @@ public class Notification {
     @Enumerated(EnumType.STRING)
     @Column(name = "canal")
     private Channel canal;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    User user;
 
     public Notification() {}
 
@@ -21,7 +25,6 @@ public class Notification {
         this.contenido=content;
         this.canal=channel;
     }
-
 
     public Long getId() {
         return id;
@@ -53,5 +56,13 @@ public class Notification {
 
     public void setCanal(Channel canal) {
         this.canal = canal;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

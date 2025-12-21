@@ -21,29 +21,38 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthFilter) throws Exception {
 
         http
-                // API REST: sin CSRF (porque no hay cookies/sesión)
-                .csrf(csrf -> csrf.disable())
+                // CSRF: para API REST off, pero igual ignoramos H2 explícitamente
+                .csrf(csrf -> csrf
+                        .disable()
+                )
+
+                // H2 Console necesita frames (si no, se ve “roto”)
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.disable())
+                )
 
                 // Stateless: no guardamos sesión
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                // IMPORTANTÍSIMO: deshabilita la pantalla de login
+                // Sin login form
                 .formLogin(form -> form.disable())
                 .logout(logout -> logout.disable())
+
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 )
+
                 .authorizeHttpRequests(auth -> auth
-                        // auth + swagger públicos
+                        .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
-                        // todo lo demás protegido
                         .anyRequest().authenticated()
                 )
+
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

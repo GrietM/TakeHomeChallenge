@@ -1,6 +1,6 @@
 package com.miempresa.miaplicacion.users.service;
 
-import com.miempresa.miaplicacion.users.dto.UserCreateRequestDTO;
+import com.miempresa.miaplicacion.users.dto.UserUpadteRequestDTO;
 import com.miempresa.miaplicacion.users.dto.UserResponseDTO;
 import com.miempresa.miaplicacion.users.mapper.UserMapper;
 import com.miempresa.miaplicacion.users.model.User;
@@ -44,17 +44,9 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    @Override
-    public UserResponseDTO createUser(UserCreateRequestDTO userDTO) {
-        User user = userMapper.toEntity(userDTO);
-
-        UserResponseDTO userResponseDTO =userMapper.toResponseDTO(userRepository.save(user));
-
-        return userResponseDTO;
-    }
 
     @Override
-    public Optional<UserResponseDTO> updateUser(Long id, UserCreateRequestDTO userDTO) {
+    public Optional<UserResponseDTO> updateUser(Long id, UserUpadteRequestDTO userDTO) {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty()){
             return Optional.empty();

@@ -1,6 +1,6 @@
 package com.miempresa.miaplicacion.users.mapper;
 
-import com.miempresa.miaplicacion.users.dto.UserCreateRequestDTO;
+import com.miempresa.miaplicacion.users.dto.UserUpadteRequestDTO;
 import com.miempresa.miaplicacion.users.dto.UserResponseDTO;
 import com.miempresa.miaplicacion.users.model.User;
 import org.springframework.stereotype.Component;
@@ -18,16 +18,7 @@ public class UserMapper {
         return userDTO;
     }
 
-    public User toEntity (UserCreateRequestDTO userDTO){
-        User user = new User();
-        user.setName(userDTO.getName());
-        user.setLastname(userDTO.getLastname());
-        user.setEmail(userDTO.getEmail());
-
-        return user;
-    }
-
-    public void applyUpdates(User existing, UserCreateRequestDTO dto) {
+    public void applyUpdates(User existing, UserUpadteRequestDTO dto) {
         existing.setName(dto.getName());
         existing.setLastname(dto.getLastname());
         existing.setEmail(dto.getEmail());

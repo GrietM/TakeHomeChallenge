@@ -2,7 +2,6 @@ package com.miempresa.miaplicacion.notifications.controller;
 
 import com.miempresa.miaplicacion.notifications.dto.NotificationCreateRequestDTO;
 import com.miempresa.miaplicacion.notifications.dto.NotificationResponseDTO;
-import com.miempresa.miaplicacion.notifications.model.Notification;
 import com.miempresa.miaplicacion.notifications.service.NotificationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

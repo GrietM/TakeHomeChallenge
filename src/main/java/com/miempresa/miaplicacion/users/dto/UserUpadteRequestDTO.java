@@ -1,6 +1,6 @@
 package com.miempresa.miaplicacion.users.dto;
 
-public class UserCreateRequestDTO {
+public class UserUpadteRequestDTO {
 
     private String name;
     private String lastname;

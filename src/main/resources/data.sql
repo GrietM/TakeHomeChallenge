@@ -2,7 +2,9 @@
 -- USER DE PRUEBA
 -- =========================
 -- email: user@test.com
--- password: test123 (bcrypt)
+-- password (plain): test123
+-- password (bcrypt hash): $2a$10$...
+
 INSERT INTO users (name, lastname, email, password)
 VALUES (
   'test',

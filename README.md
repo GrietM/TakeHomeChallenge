@@ -76,16 +76,8 @@ The design is extensible by nature, allowing new notification channels to be add
 
 ## Quick Start
 
-### Run locally
-
-    mvn clean install
-    mvn spring-boot:run
-
-### Run with Docker
-
-    docker build -t notifications-app .
-    docker run -p 8085:8085 -e JWT_SECRET=change_me notifications-app
-
+    chmod 711 ./up_dev.sh
+    ./up_dev.sh
 
 ## How to run the project
 
@@ -116,7 +108,7 @@ The application will be available at:  http://localhost:8085
 
 - Run the container:
 
-        docker run -p 8085:8085 -e JWT_SECRET=change_me notifications-app
+        docker run -p 8085:8085 -e JWT_SECRET=change_me_please_use_a_long_random_secret_32chars notifications-app
 
 ## Swagger / OpenAPI
 
@@ -194,9 +186,10 @@ No existing business logic needs to be modified, ensuring scalability and mainta
 
 The application supports configuration via environment variables.
 
-    Example: JWT_SECRET=change_me
+    Example: JWT_SECRET=change_me_please_use_a_long_random_secret_32chars
 
 A sample file with example values can be found in `.env.example`.
+JWT_SECRET must be at least 32 characters (required for HS256).
 
 ## Additional comments
 

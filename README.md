@@ -6,6 +6,23 @@ This project is a REST API developed in Java with Spring Boot for managing users
 
 The main goal of this project is to demonstrate backend development best practices as part of a Take-Home Challenge for a Backend Java position.
 
+## Table of Contents
+- [Description](#description)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [How to run the project](#how-to-run-the-project)
+- [Swagger / OpenAPI](#swagger--openapi)
+- [Authentication Flow with JWT](#authentication-flow-with-jwt)
+- [Routes](#routes)
+- [H2 Database](#h2-database)
+- [Design Decisions](#design-decisions)
+- [Extending Notification Channels](#extending-notification-channels)
+- [Environment Variables](#environment-variables)
+- [Additional comments](#additional-comments)
+- [Possible Improvements](#possible-improvements)
+
 ## Description
 
 The application allows authenticated users to:
@@ -131,6 +148,18 @@ Once authorized, all protected endpoints can be accessed normally.
 
 For development purposes, a default user is created at startup.
 Credentials can be found in the `.env.example` file.
+
+## Routes
+
+Main API endpoints:
+
+- Swagger UI: http://localhost:8085/swagger-ui.html
+- Authentication endpoints: `/api/auth/**`
+- Users endpoints: `/api/users/**`
+- Notifications endpoints: `/api/notifications/**`
+
+All endpoints (except authentication) are secured using JWT.
+
 
 ## H2 Database
 

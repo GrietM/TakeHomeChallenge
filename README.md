@@ -90,6 +90,8 @@ The design is extensible by nature, allowing new notification channels to be add
 - Maven
 
 - Docker (optional)
+> **Note (Linux users):** Docker must be configured to run without `sudo`  
+> See: https://docs.docker.com/engine/install/linux-postinstall/
 
 ## Quick Start
 

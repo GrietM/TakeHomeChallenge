@@ -20,8 +20,10 @@ The main goal of this project is to demonstrate backend development best practic
 - [Design Decisions](#design-decisions)
 - [Extending Notification Channels](#extending-notification-channels)
 - [Environment Variables](#environment-variables)
+- [Deployment (Heroku)](#deployment-heroku)
 - [Additional comments](#additional-comments)
 - [Possible Improvements](#possible-improvements)
+
 
 ## Description
 
@@ -132,8 +134,9 @@ The application will be available at:  http://localhost:8085
 ## Swagger / OpenAPI
 
 The API is documented using Swagger.
-
-Access it at: http://localhost:8085/swagger-ui.html
+Access it at:
+- Local: http://localhost:8085/swagger-ui.html
+- Deployed (Heroku): https://notifications-service-thc-afdef46ef15a.herokuapp.com/swagger-ui/index.html
 
 ##  Authentication Flow with JWT
 
@@ -222,6 +225,41 @@ The application supports configuration via environment variables.
 A sample file with example values can be found in `.env.example`.
 JWT_SECRET must be at least 32 characters (required for HS256).
 
+## Deployment (Heroku)
+
+The application is deployed on **Heroku** and can be accessed online without requiring any local setup.
+
+### 🔗 Live API – Swagger UI
+
+You can explore and test the API using Swagger at:
+
+https://notifications-service-thc-afdef46ef15a.herokuapp.com/swagger-ui/index.html#
+
+
+### ⚙️ Deployment details
+
+- **Platform:** Heroku
+- **Runtime:** Java (Spring Boot)
+- **Build tool:** Maven
+- **Database:** H2 (in-memory)
+- **Process type:** Web dyno
+- **Port configuration:**  
+  The application listens on the port provided by Heroku via the `PORT` environment variable.
+- **Configuration management:**  
+  Sensitive values (such as the JWT secret) are provided using environment variables (`JWT_SECRET`).
+
+### 🔐 Authentication in production
+
+- JWT-based authentication is enabled in the deployed environment.
+- Public endpoints (authentication and Swagger documentation) are accessible without a token.
+- Protected endpoints require a valid JWT, which can be provided via the Swagger **Authorize** button.
+
+### 🗄️ Persistence notes
+
+- The deployed application uses an **in-memory H2 database**.
+- Data is reset when the dyno restarts (expected behavior for demo purposes).
+
+
 ## Additional comments
 
 Although the challenge suggests using a relational database such as PostgreSQL or MySQL,
@@ -243,4 +281,4 @@ databases and could be migrated with minimal effort.
 
 - Improve error handling and validation messages (ejemplo de uno q no este OK)
 
-- Deployment (Heroku)
+- Add CI/CD pipeline (e.g. GitHub Actions) to automate build and deployment
